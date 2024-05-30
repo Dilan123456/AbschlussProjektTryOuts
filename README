@@ -1,0 +1,23 @@
+Initial Training Log:
+Epoch 1/10
+2024-05-30 22:11:03.483598: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:450] ShuffleDatasetV3:15: Filling up shuffle buffer (this may take a while): 135 of 1000
+2024-05-30 22:11:11.699752: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:480] Shuffle buffer filled.
+329/329 ━━━━━━━━━━━━━━━━━━━━ 166s 443ms/step - accuracy: 0.1229 - loss: 3.2391 - val_accuracy: 0.3658 - val_loss: 2.3372
+Epoch 2/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 136s 413ms/step - accuracy: 0.4554 - loss: 1.9948 - val_accuracy: 0.5067 - val_loss: 1.8550
+Epoch 3/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 138s 421ms/step - accuracy: 0.7163 - loss: 1.0337 - val_accuracy: 0.5649 - val_loss: 1.7648
+Epoch 4/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 133s 404ms/step - accuracy: 0.8634 - loss: 0.4826 - val_accuracy: 0.5987 - val_loss: 1.9715
+Epoch 5/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 125s 381ms/step - accuracy: 0.9261 - loss: 0.2712 - val_accuracy: 0.6196 - val_loss: 2.0133
+Epoch 6/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 129s 391ms/step - accuracy: 0.9498 - loss: 0.1936 - val_accuracy: 0.6173 - val_loss: 2.2705
+Epoch 7/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 133s 405ms/step - accuracy: 0.9614 - loss: 0.1374 - val_accuracy: 0.6427 - val_loss: 2.2777
+Epoch 8/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 128s 389ms/step - accuracy: 0.9670 - loss: 0.1290 - val_accuracy: 0.6156 - val_loss: 2.4063
+Epoch 9/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 126s 384ms/step - accuracy: 0.9682 - loss: 0.1250 - val_accuracy: 0.6351 - val_loss: 2.2292
+Epoch 10/10
+329/329 ━━━━━━━━━━━━━━━━━━━━ 126s 384ms/step - accuracy: 0.9722 - loss: 0.0878 - val_accuracy: 0.6262 - val_loss: 2.3744
