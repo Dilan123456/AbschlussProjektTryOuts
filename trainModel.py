@@ -14,8 +14,8 @@ train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 
 batch_size = 16  # Reduced batch size
-img_height = 224  # Standard input size for MobileNetV2
-img_width = 224
+img_height = 256  # Standard input size for MobileNetV2
+img_width = 256
 
 train_ds = tf.keras.utils.image_dataset_from_directory(
     train_dir,

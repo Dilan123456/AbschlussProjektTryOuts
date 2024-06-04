@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Trash Classification</title>
+</head>
+<body>
+    <h1>trash classifier</h1>
+    <p>Upload a picture to classify which type of trash it belongs to</p>
+    <form id="upload-form">
+        <input type="file" id="image-input" accept="image/*" required>
+        <button type="submit">classify</button>
+    </form>
+    <h2>Result: </h2>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('upload-form').onsubmit = async function(event) {
+            event.preventDefault();
+            const imageInput = document.getElementById('image-input');
+
+            if(!imageInput.files.length){
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', imageInput.files[0]);
+
+            const response = await fetch('/predict', {method: 'POST', body: formData,});
+
+            if(response.ok){
+                const data = await response.json();
+                document.getElementById('result').textContent = 'Category: ' + data.class_name;
+            } else {
+                document.getElementById('result').textContent = 'Error during file-upload.';
+            }
+        };
+    </script>
+</body>
+</html>
