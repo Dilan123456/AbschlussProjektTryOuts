@@ -1,7 +1,56 @@
+Manual for the student reviewing my project:
+
+To run the application you will have to create a python environment using the requirements.txt file.
+
+To start the web-application you have to switch to the directory of the app folder and run the project with the following command:
+flask run
+
+In the Folder images_Kopie you will find 3 Subfolders. The Subfolder labeled as test contains images you can use to test the 
+application and response. The test-subfolder contains 30 Subfolders each one representing a category of waste. 
+Every Category contains 350 images to choose from, which you can upload on to the web application.
+
+
+Motivation Behind the Project
+In todays world, waste management is an increasingly critical issue as we grapple with the environmental impacts of improperly disposed waste. 
+The problem at hand is the inefficient and often incorrect classification of waste, leading to significant challenges in recycling processes and 
+overall waste management. Misclassification of trash can lead to contamination of recyclable materials, increased landfill waste, and environmental 
+pollution.
+
+Problem
+The primary problem this project addresses is the need for an accurate, automated system to classify waste into correct categories. 
+The manual sorting of waste is not only time-consuming and labor-intensive but also prone to human error. An effective solution to this problem can 
+significantly enhance recycling efficiency and contribute to a more sustainable environment.
+
+Motivation
+The motivation behind developing a neural network for image-based trash classification stems from the urgent need to improve waste management practices globally. 
+By leveraging machine learning and neural networks, we can create a system that assists individuals and organizations in accurately sorting waste, 
+thereby reducing the strain on recycling facilities and minimizing the environmental footprint.
+
+Relevance of the Project
+This project is highly relevant in the context of global environmental sustainability efforts. Effective waste classification and management are crucial for reducing pollution, 
+conserving natural resources, and ensuring the longevity of our planet. By providing an accessible tool that utilizes advanced machine learning techniques, 
+this project empowers users to contribute to these sustainability goals.
+
+Moreover, this project aligns with the broader push towards smart cities and the integration of technology into everyday life to solve practical problems. 
+It also showcases the potential of artificial intelligence in creating impactful solutions for environmental challenges, promoting a cleaner, greener future for all.
+
+
+Dataset
 Link to the Dataset:https://www.kaggle.com/datasets/alistairking/recyclable-and-household-waste-classification?resource=download-directory&select=images
 
 
-Initial Training Log:
+Interpretation and Validation
+
+Initial Model
+The first model used a basic Convolutional Neural Network architecture without data augmentation or pre-trained weights. 
+It was trained for 10 epochs with the following results:
+
+Training Accuracy: Started at 12.29% and improved to 97.22%.
+Validation Accuracy: Started at 36.58% and improved to 62.62%.
+Training Loss: Started at 3.2391 and reduced to 0.0878.
+Validation Loss: Started at 2.3372 and increased to 2.3744.
+
+Training Log:
 Epoch 1/10
 2024-05-30 22:11:03.483598: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:450] ShuffleDatasetV3:15: Filling up shuffle buffer (this may take a while): 135 of 1000
 2024-05-30 22:11:11.699752: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:480] Shuffle buffer filled.
@@ -25,7 +74,19 @@ Epoch 9/10
 Epoch 10/10
 329/329 ━━━━━━━━━━━━━━━━━━━━ 126s 384ms/step - accuracy: 0.9722 - loss: 0.0878 - val_accuracy: 0.6262 - val_loss: 2.3744
 
-Training Log after adding data augmentation and using dropout:
+The initial model showed significant overfitting, indicated by the high training accuracy but much lower validation accuracy and increasing validation loss. 
+The model learned the training data well but failed to generalize on new data. This overfitting is likely due to the lack of regularization techniques 
+such as dropout and data augmentation.
+
+Second Model
+The second model includes data augmentation and dropout to reduce overfitting and was trained for 10 epochs:
+
+Training Accuracy: Started at 9.69% and improved to 57.39%.
+Validation Accuracy: Started at 22.84% and improved to 49.51%.
+Training Loss: Started at 3.2969 and reduced to 1.4541.
+Validation Loss: Started at 2.7191 and reduced to 1.9250.
+
+Training Log:
 Epoch 1/10
 2024-05-30 22:49:56.160637: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:450] ShuffleDatasetV3:15: Filling up shuffle buffer (this may take a while): 242 of 1000
 2024-05-30 22:50:01.614898: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:480] Shuffle buffer filled.
@@ -49,8 +110,30 @@ Epoch 9/10
 Epoch 10/10
 329/329 ━━━━━━━━━━━━━━━━━━━━ 166s 505ms/step - accuracy: 0.5739 - loss: 1.4541 - val_accuracy: 0.4951 - val_loss: 1.9250
 
-Final Training Log after using fine tuning and a pretrained base Model.
+While data augmentation and dropout helped to reduce overfitting, the overall performance of the model was still not satisfactory. 
+The accuracy levels were low, suggesting that the model complexity and training strategy needed further improvement. 
+The model struggled to effectively capture the features necessary for accurate classification.
 
+Final Model
+
+The final model utilized MobileNetV2, a pre-trained model on ImageNet, with data augmentation, learning rate scheduling, and early stopping. 
+Initial training and fine-tuning were performed over 20 and 30 epochs, respectively.
+
+Initial Training Results:
+
+Training Accuracy: Started at 45.73% and improved to 90.95%.
+Validation Accuracy: Started at 70.89% and improved to 84.13%.
+Training Loss: Started at 1.9530 and reduced to 0.0331.
+Validation Loss: Started at 0.9405 and reduced to 0.6932.
+
+Fine-tuning Results:
+
+Training Accuracy: Started at 69.52% and improved to 99.23%.
+Validation Accuracy: Started at 75.64% and improved to 84.13%.
+Training Loss: Started at 1.0143 and reduced to 0.0331.
+Validation Loss: Started at 0.9374 and reduced to 0.6932.
+
+Training Log:
 Epoch 1/20
 657/657 ━━━━━━━━━━━━━━━━━━━━ 218s 316ms/step - accuracy: 0.4573 - loss: 1.9530 - val_accuracy: 0.7089 - val_loss: 0.9405 - learning_rate: 0.0010
 Epoch 2/20
@@ -111,3 +194,7 @@ Epoch 13/30
 657/657 ━━━━━━━━━━━━━━━━━━━━ 302s 460ms/step - accuracy: 0.9877 - loss: 0.0431 - val_accuracy: 0.8396 - val_loss: 0.6953 - learning_rate: 2.5000e-05
 Epoch 14/30
 657/657 ━━━━━━━━━━━━━━━━━━━━ 300s 457ms/step - accuracy: 0.9923 - loss: 0.0331 - val_accuracy: 0.8413 - val_loss: 0.6932 - learning_rate: 1.2500e-05
+
+The use of a pre-trained model significantly improved the models performance. MobileNetV2 provided a strong feature extraction backbone, and fine-tuning allowed 
+the model to adapt these features to the specific trash classification task. The introduction of a learning rate scheduler and early stopping also contributed 
+to more stable and effective training, preventing overfitting and ensuring the models generalization capability.
