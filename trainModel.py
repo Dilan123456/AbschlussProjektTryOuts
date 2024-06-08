@@ -13,8 +13,8 @@ base_dir = 'C:/Users/Dilan/Documents/ML_2/AbschlussProjektTryOuts/images_Kopie'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 
-batch_size = 16  # Reduced batch size
-img_height = 256  # Standard input size for MobileNetV2
+batch_size = 16 
+img_height = 256  
 img_width = 256
 
 train_ds = tf.keras.utils.image_dataset_from_directory(
@@ -96,10 +96,10 @@ history = model.fit(
 # Fine-tuning
 base_model.trainable = True
 
-# Let's fine-tune from layer 100 and onwards
+# Fine-tune from layer 100 and onwards
 fine_tune_at = 100
 
-# Freeze all the layers before the `fine_tune_at` layer
+# Freezes all the layers before the `fine_tune_at` layer
 for layer in base_model.layers[:fine_tune_at]:
     layer.trainable = False
 

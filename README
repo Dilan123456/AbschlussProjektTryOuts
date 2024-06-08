@@ -11,22 +11,26 @@ Every Category contains 350 images to choose from, which you can upload on to th
 
 
 Motivation Behind the Project
+
 In todays world, waste management is an increasingly critical issue as we grapple with the environmental impacts of improperly disposed waste. 
 The problem at hand is the inefficient and often incorrect classification of waste, leading to significant challenges in recycling processes and 
 overall waste management. Misclassification of trash can lead to contamination of recyclable materials, increased landfill waste, and environmental 
 pollution.
 
 Problem
+
 The primary problem this project addresses is the need for an accurate, automated system to classify waste into correct categories. 
 The manual sorting of waste is not only time-consuming and labor-intensive but also prone to human error. An effective solution to this problem can 
 significantly enhance recycling efficiency and contribute to a more sustainable environment.
 
 Motivation
+
 The motivation behind developing a neural network for image-based trash classification stems from the urgent need to improve waste management practices globally. 
 By leveraging machine learning and neural networks, we can create a system that assists individuals and organizations in accurately sorting waste, 
 thereby reducing the strain on recycling facilities and minimizing the environmental footprint.
 
 Relevance of the Project
+
 This project is highly relevant in the context of global environmental sustainability efforts. Effective waste classification and management are crucial for reducing pollution, 
 conserving natural resources, and ensuring the longevity of our planet. By providing an accessible tool that utilizes advanced machine learning techniques, 
 this project empowers users to contribute to these sustainability goals.
@@ -42,6 +46,7 @@ Link to the Dataset:https://www.kaggle.com/datasets/alistairking/recyclable-and-
 Interpretation and Validation
 
 Initial Model
+
 The first model used a basic Convolutional Neural Network architecture without data augmentation or pre-trained weights. 
 It was trained for 10 epochs with the following results:
 
@@ -51,6 +56,7 @@ Training Loss: Started at 3.2391 and reduced to 0.0878.
 Validation Loss: Started at 2.3372 and increased to 2.3744.
 
 Training Log:
+
 Epoch 1/10
 2024-05-30 22:11:03.483598: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:450] ShuffleDatasetV3:15: Filling up shuffle buffer (this may take a while): 135 of 1000
 2024-05-30 22:11:11.699752: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:480] Shuffle buffer filled.
@@ -79,6 +85,7 @@ The model learned the training data well but failed to generalize on new data. T
 such as dropout and data augmentation.
 
 Second Model
+
 The second model includes data augmentation and dropout to reduce overfitting and was trained for 10 epochs:
 
 Training Accuracy: Started at 9.69% and improved to 57.39%.
@@ -87,6 +94,7 @@ Training Loss: Started at 3.2969 and reduced to 1.4541.
 Validation Loss: Started at 2.7191 and reduced to 1.9250.
 
 Training Log:
+
 Epoch 1/10
 2024-05-30 22:49:56.160637: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:450] ShuffleDatasetV3:15: Filling up shuffle buffer (this may take a while): 242 of 1000
 2024-05-30 22:50:01.614898: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:480] Shuffle buffer filled.
@@ -134,6 +142,7 @@ Training Loss: Started at 1.0143 and reduced to 0.0331.
 Validation Loss: Started at 0.9374 and reduced to 0.6932.
 
 Training Log:
+
 Epoch 1/20
 657/657 ━━━━━━━━━━━━━━━━━━━━ 218s 316ms/step - accuracy: 0.4573 - loss: 1.9530 - val_accuracy: 0.7089 - val_loss: 0.9405 - learning_rate: 0.0010
 Epoch 2/20
@@ -198,3 +207,132 @@ Epoch 14/30
 The use of a pre-trained model significantly improved the models performance. MobileNetV2 provided a strong feature extraction backbone, and fine-tuning allowed 
 the model to adapt these features to the specific trash classification task. The introduction of a learning rate scheduler and early stopping also contributed 
 to more stable and effective training, preventing overfitting and ensuring the models generalization capability.
+
+Benchmark comparison:
+
+To ensure the robustness and effectiveness of our deep learning model based on MobileNetV2, we compared its performance to a benchmark model, 
+specifically a Random Forest classifier. The comparison was conducted using the same dataset and evaluation metrics to maintain consistency and fairness.
+
+We trained a Random Forest classifier with 100 estimators using the same training and validation datasets. The features were extracted from the images 
+by flattening them into one-dimensional arrays. Here are the performance metrics of the Random Forest classifier:
+
+Accuracy: 59.42%
+Precision, Recall, and F1-Score: Varied across different classes with an average 
+precision of approximately 61%, recall of 59%, and F1-score of 59%.
+
+The confusion matrix showed that while the Random Forest classifier performed reasonably well on some classes, it struggled with others, 
+indicating a moderate overall performance.
+
+Traininglog:
+Random Forest Classification Report
+              precision    recall  f1-score   support
+
+           0       0.78      0.71      0.74        75
+           1       0.51      0.43      0.46        75
+           2       0.66      0.61      0.63        75
+           3       0.41      0.44      0.43        75
+           4       0.31      0.40      0.35        75
+           5       0.30      0.24      0.26        75
+           6       0.52      0.79      0.62        75
+           7       0.59      0.67      0.62        75
+           8       0.42      0.57      0.48        75
+           9       0.59      0.84      0.70        75
+          10       0.62      0.67      0.65        75
+          11       0.53      0.72      0.61        75
+          12       0.66      0.60      0.63        75
+          13       0.60      0.85      0.71        75
+          14       0.56      0.29      0.39        75
+          15       0.51      0.39      0.44        75
+          16       0.62      0.43      0.50        75
+          17       0.56      0.69      0.62        75
+          18       0.74      0.80      0.77        75
+          19       0.62      0.64      0.63        75
+          20       0.85      0.60      0.70        75
+          21       0.86      0.67      0.75        75
+          22       0.73      0.47      0.57        75
+          23       0.73      0.77      0.75        75
+          24       0.58      0.55      0.56        75
+          25       0.56      0.48      0.52        75
+          26       0.60      0.48      0.53        75
+          27       0.77      0.79      0.78        75
+          28       0.64      0.73      0.68        75
+          29       0.75      0.52      0.61        75
+
+    accuracy                           0.59      2250
+   macro avg       0.61      0.59      0.59      2250
+weighted avg       0.61      0.59      0.59      2250
+
+Random Forest Confusion Matrix
+[[53  0  1  0  1  0  2  3  1  0  0  2  0  2  0  2  1  0  1  0  0  0  0  2
+   0  1  2  0  0  1]
+ [ 1 32  3  0  3  0  1  1  2  2  0  3  1  1  1  3  0  1  3  1  0  0  2  0
+   1  0 13  0  0  0]
+ [ 0  3 46  1  0  2  0  2  3  3  1  4  1  1  0  1  1  1  1  1  0  1  0  0
+   0  1  0  0  1  0]
+ [ 1  0  1 33 25  4  2  1  2  1  1  0  0  1  0  0  0  0  0  0  0  0  0  1
+   0  0  2  0  0  0]
+ [ 0  0  1 31 30  0  2  1  0  3  1  1  1  1  0  1  0  0  0  0  0  0  0  0
+   0  0  1  0  0  1]
+ [ 2  0  1  0  0 18  3  1  4  4  2  5  1 12  2  0  0  2  1  2  1  3  0  3
+   3  4  0  0  0  1]
+ [ 0  0  0  1  1  6 59  0  0  3  0  0  0  1  0  0  0  1  0  0  0  0  0  0
+   0  3  0  0  0  0]
+ [ 0  0  1  0  1  3  0 50  0  0  3  1  0  0  1  0  0  1  0  1  0  1  2  1
+   3  1  0  2  3  0]
+ [ 2  0  0  2  4  2  3  1 43  4  0  2  1  0  1  0  1  0  0  0  0  0  2  0
+   1  2  1  1  1  1]
+ [ 0  0  0  0  1  0  2  1  5 63  1  0  0  0  0  0  0  0  0  0  0  0  0  0
+   0  2  0  0  0  0]
+ [ 1  0  0  0  3  2  1  0  3  1 50  1  1  0  0  0  0  3  3  1  0  0  0  0
+   3  0  1  0  0  1]
+ [ 0  0  0  1  0  0  0  1  1  0  5 54  3  0  0  0  2  1  0  0  0  0  1  0
+   0  2  1  2  1  0]
+ [ 1  0  1  0  3  0  1  0  1  0  1  7 45  1  0  0  1  2  0  2  0  1  1  1
+   0  2  0  0  2  2]
+ [ 0  0  0  0  2  3  1  0  1  0  0  0  0 64  1  0  0  0  0  0  0  0  0  0
+   1  1  1  0  0  0]
+ [ 0  1  1  2  1  2  7  5  4  0  1  1  6  2 22  6  0  2  1  2  0  0  2  0
+   0  2  0  1  1  3]
+ [ 1  3  3  2  1  3  3  2  6  1  1  0  1  2  3 29  2  1  0  2  2  0  1  3
+   0  0  0  0  3  0]
+ [ 0  0  0  2  8  0  0  3  2  2  2  4  0  1  1  0 32  9  1  2  0  0  1  2
+   0  0  0  1  2  0]
+ [ 0  0  1  0  0  0  0  1  1  0  0  1  2  0  0  0  4 52  2  1  0  0  0  0
+   0  1  0  6  3  0]
+ [ 0  0  0  0  1  2  0  1  0  1  2  3  1  0  0  0  1  0 60  0  0  0  0  1
+   2  0  0  0  0  0]
+ [ 1  1  1  1  1  1  0  1  0  1  1  1  1  1  0  2  0  4  0 48  2  0  0  0
+   0  1  0  1  5  0]
+ [ 0  0  1  1  1  0  4  0  2  0  0  1  0  1  2  1  2  1  1  2 45  0  0  3
+   3  2  0  0  1  1]
+ [ 0  0  2  0  1  1  4  0  3  1  3  1  1  1  0  1  0  0  1  0  1 50  0  0
+   4  0  0  0  0  0]
+ [ 0  0  0  0  1  2  1  4  3  6  0  2  0  6  1  2  2  1  0  2  0  0 35  0
+   4  0  0  0  2  1]
+ [ 1  0  1  0  1  0  4  0  1  0  0  0  0  0  0  1  1  0  0  2  2  0  0 58
+   1  1  0  0  1  0]
+ [ 1  1  1  1  2  1  1  0  3  1  5  2  0  1  1  2  0  4  1  0  0  2  0  1
+  41  0  0  1  2  0]
+ [ 2  1  1  0  0  4 11  1  2  0  0  1  1  1  1  3  1  3  0  1  0  0  1  3
+   0 36  1  0  0  0]
+ [ 0 20  1  0  2  2  1  0  5  2  0  0  0  1  0  0  0  0  1  0  0  0  0  0
+   1  2 36  0  0  1]
+ [ 0  1  1  0  0  0  0  1  0  2  0  0  0  1  2  1  0  1  2  0  0  0  0  0
+   1  0  0 59  3  0]
+ [ 0  0  0  0  0  1  0  2  1  2  0  2  1  1  0  1  0  3  0  3  0  0  0  0
+   1  0  0  2 55  0]
+ [ 1  0  1  2  4  2  1  2  4  3  0  2  0  3  0  1  1  0  2  4  0  0  0  0
+   1  0  1  1  0 39]]
+Random Forest Accuracy
+0.5942222222222222
+
+The MobileNetV2 model, fine-tuned with additional dense layers and trained with data augmentation techniques, 
+demonstrated significantly better performance:
+
+Best Training Accuracy: 99.23%
+Validation Accuracy: 84.13%
+Validation Loss: 0.6932
+
+The MobileNetV2 model consistently achieved high accuracy and low validation loss across multiple epochs, 
+indicating its superior ability to generalize from the training data to unseen validation data.
+

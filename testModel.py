@@ -9,8 +9,8 @@ new_model = tf.keras.models.load_model('model_fine_tuned.keras')
 
 test_dir = 'C:/Users/Dilan/Documents/ML_2/AbschlussProjektTryOuts/images_Kopie/test'
 
-batch_size = 16  # Reduced batch size
-img_height = 256  # Standard input size for MobileNetV2
+batch_size = 16
+img_height = 256
 img_width = 256
 
 test_ds = tf.keras.utils.image_dataset_from_directory(
